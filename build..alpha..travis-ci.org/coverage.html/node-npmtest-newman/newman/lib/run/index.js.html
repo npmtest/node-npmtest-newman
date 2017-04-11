@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-newman/newman/lib/run/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-newman">npmtest-newman (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-newman/newman/lib/run/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">2.94% <small>(2 / 68)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 59)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">2.99% <small>(2 / 67)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-newman/newman/lib/run/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var fs = require('fs'),
+    _ = require('lodash'),
+    sdk = require('postman-collection'),
+    asyncEach = require('async/each'),
+    EventEmitter = require('eventemitter3'),
+    runtime = require('postman-runtime'),
+    util = require('../util'),
+    exportFile = require('./export-file'),
+    RunSummary = require('./summary'),
+    getOptions = require('./options'),
+    request = require('postman-request'),
+&nbsp;
+    /**
+     * This object describes the various events raised by Newman, and what each event argument contains.
+     * Error and cursor are present in all events.
+     *
+     * @type {Object}
+     */
+    runtimeEvents = {
+        start: [],
+        beforeIteration: [],
+        beforeItem: ['item'],
+        beforePrerequest: ['events', 'item'],
+        prerequest: ['executions', 'item'],
+        beforeRequest: ['request', 'item'],
+        request: ['response', 'request', 'item'],
+        beforeTest: ['events', 'item'],
+        test: ['executions', 'item'],
+        item: ['item'],
+        iteration: [],
+        beforeScript: ['script', 'event', 'item'],
+        script: ['execution', 'script', 'event', 'item']
+    },
+&nbsp;
+    /**
+     * load all the default reporters here. if you have new reporter, add it to this list
+     * we know someone, who does not like dynamic requires
+     *
+     * @type {Object}
+     */
+    defaultReporters = {
+        cli: require('../reporters/cli'),
+        json: require('../reporters/json'),
+        html: require('../reporters/html'),
+        junit: require('../reporters/junit'),
+        progress: require('../reporters/progress'),
+        emojitrain: require('../reporters/emojitrain')
+    };
+&nbsp;
+/**
+ * Runs the collection, with all the provided options, returning an EventEmitter.
+ *
+ * @param {Object} options - The set of wrapped options, passed by the CLI parser.
+ * @param {Collection|Object|String} options.collection - A JSON / Collection / String representing the collection.
+ * @param {Object|String} options.environment - An environment JSON / file path for the current collection run.
+ * @param {Object|String} options.globals - A globals JSON / file path for the current collection run.
+ * @param {Object|String} options.iterationData - An iterationDate JSON / file path for the current collection run.
+ * @param {Object|String} options.reporters - A set of reporter names and their associated options for the current run.
+ * @param {String} options.exportGlobals - The relative path to export the globals file from the current run to.
+ * @param {String} options.exportEnvironment - The relative path to export the environment file from the current run to.
+ * @param {String} options.exportCollection - The relative path to export the collection from the current run to.
+ * @param {Function} callback - The callback function invoked to mark the end of the collection run.
+ * @returns {EventEmitter} - An EventEmitter instance with done and error event attachments.
+ */
+module.exports = <span class="fstat-no" title="function not covered" >function (options, callback) {</span>
+    // validate all options. it is to be noted that `options` parameter is option and is polymorphic
+<span class="cstat-no" title="statement not covered" >    (!callback &amp;&amp; _.isFunction(options)) &amp;&amp; (</span>
+        (callback = options),
+        (options = {})
+    );
+<span class="cstat-no" title="statement not covered" >    !_.isFunction(callback) &amp;&amp; (callback = _.noop);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var emitter = new EventEmitter(), // @todo: create a new inherited constructor</span>
+        runner = new runtime.Runner();
+&nbsp;
+    // get the configuration from various sources
+<span class="cstat-no" title="statement not covered" >    getOptions(options, <span class="fstat-no" title="function not covered" >function (err, options) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            return callback(err);</span>
+        }
+&nbsp;
+        // ensure that the collection option is present before starting a run
+<span class="cstat-no" title="statement not covered" >        if (!_.isObject(options.collection)) {</span>
+<span class="cstat-no" title="statement not covered" >            return callback(new Error('newman: expecting a collection to run'));</span>
+        }
+&nbsp;
+        // store summary object and other relevant information inside the emitter
+<span class="cstat-no" title="statement not covered" >        emitter.summary = new RunSummary(emitter, options);</span>
+&nbsp;
+        // to store the exported content from reporters
+<span class="cstat-no" title="statement not covered" >        emitter.exports = [];</span>
+&nbsp;
+        // now start the run!
+<span class="cstat-no" title="statement not covered" >        runner.run(options.collection, {</span>
+            stopOnFailure: options.bail, // LOL, you just got trolled ¯\_(ツ)_/¯
+            abortOnFailure: options.abortOnFailure, // used in integration tests, to be considered for a future release
+            iterationCount: options.iterationCount,
+            environment: options.environment,
+            globals: options.globals,
+            entrypoint: options.folder,
+            data: options.iterationData,
+            delay: {
+                item: options.delayRequest
+            },
+            // todo: add support for more types of timeouts, currently only request is supported
+            timeout: options.timeoutRequest ? { request: options.timeoutRequest } : undefined,
+            fileResolver: fs,
+            requester: {
+                cookieJar: request.jar(),
+                followRedirects: _.has(options, 'ignoreRedirects') ? !options.ignoreRedirects : undefined,
+                strictSSL: _.has(options, 'insecure') ? !options.insecure : undefined
+            },
+            certificates: options.sslClientCert &amp;&amp; new sdk.CertificateList({}, [{
+                name: 'client-cert',
+                matches: [sdk.UrlMatchPattern.MATCH_ALL_URLS],
+                key: { src: options.sslClientKey },
+                cert: { src: options.sslClientCert },
+                passphrase: options.sslClientPassphrase
+            }])
+        }, <span class="fstat-no" title="function not covered" >function (err, run) {</span>
+<span class="cstat-no" title="statement not covered" >            var callbacks = {},</span>
+                // ensure that the reporter option type polymorphism is handled
+                reporters = _.isString(options.reporters) ? [options.reporters] : options.reporters;
+&nbsp;
+            // emit events for all the callbacks triggered by the runtime
+<span class="cstat-no" title="statement not covered" >            _.forEach(runtimeEvents, <span class="fstat-no" title="function not covered" >function (definition, eventName) {</span></span>
+                // intercept each runtime.* callback and expose a global object based event
+<span class="cstat-no" title="statement not covered" >                callbacks[eventName] = <span class="fstat-no" title="function not covered" >function (err, cursor) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    var args = arguments,</span>
+                        obj = { cursor: cursor };
+&nbsp;
+                    // convert the arguments into an object by taking the key name reference from the definition
+                    // object
+<span class="cstat-no" title="statement not covered" >                    _.forEach(definition, <span class="fstat-no" title="function not covered" >function (key, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        obj[key] = args[index + 2]; </span>// first two are err, cursor
+                    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    args = [eventName, err, obj];</span>
+<span class="cstat-no" title="statement not covered" >                    emitter.emit.apply(emitter, args); </span>// eslint-disable-line prefer-spread
+                };
+            });
+&nbsp;
+            // add non generic callback handling
+<span class="cstat-no" title="statement not covered" >            _.assignIn(callbacks, {</span>
+&nbsp;
+                /**
+                 * Bubbles up console messages.
+                 *
+                 * @param {Object} cursor - The run cursor instance.
+                 * @param {String} level - The level of console logging [error, silent, etc].
+                 * @returns {*}
+                 */
+                console: <span class="fstat-no" title="function not covered" >function (cursor, level) {</span>
+<span class="cstat-no" title="statement not covered" >                    emitter.emit('console', null, {</span>
+                        cursor: cursor,
+                        level: level,
+                        messages: _.slice(arguments, 2)
+                    });
+                },
+&nbsp;
+                /**
+                 * The exception handler for the current run instance.
+                 *
+                 * @todo Fix bug of arg order in runtime.
+                 * @param {Object} cursor - The run cursor.
+                 * @param {?Error} err - An Error instance / null object.
+                 * @returns {*}
+                 */
+                exception: <span class="fstat-no" title="function not covered" >function (cursor, err) {</span>
+<span class="cstat-no" title="statement not covered" >                    emitter.emit('exception', null, {</span>
+                        cursor: cursor,
+                        error: err
+                    });
+                },
+&nbsp;
+                /**
+                 * Custom callback to override the `done` event to fire the end callback.
+                 *
+                 * @todo Do some memory cleanup here?
+                 * @param {?Error} err - An error instance / null passed from the done event handler.
+                 * @param {Object} cursor - The run instance cursor.
+                 * @returns {*}
+                 */
+                done: <span class="fstat-no" title="function not covered" >function (err, cursor) {</span>
+                    // in case runtime faced an error during run, we do not process any other event and emit `done`.
+                    // we do it this way since, an error in `done` callback would have anyway skipped any intermediate
+                    // events or callbacks
+<span class="cstat-no" title="statement not covered" >                    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                        emitter.emit('done', err, emitter.summary);</span>
+<span class="cstat-no" title="statement not covered" >                        callback(err, emitter.summary);</span>
+<span class="cstat-no" title="statement not covered" >                        return;</span>
+                    }
+&nbsp;
+                    // we emit a `beforeDone` event so that reporters and other such addons can do computation before
+                    // the run is marked as done
+<span class="cstat-no" title="statement not covered" >                    emitter.emit('beforeDone', null, {</span>
+                        cursor: cursor,
+                        summary: emitter.summary
+                    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    _.forEach(['environment', 'globals', 'collection'], <span class="fstat-no" title="function not covered" >function (item) {</span></span>
+                        // fetch the path name from options if one is provided
+<span class="cstat-no" title="statement not covered" >                        var path = _.get(options, _.camelCase(`export-${item}`));</span>
+&nbsp;
+                        // if the options have an export path, then add the item to export queue
+<span class="cstat-no" title="statement not covered" >                        path &amp;&amp; emitter.exports.push({</span>
+                            name: item,
+                            default: `newman-${item}.json`,
+                            path: path,
+                            content: _.merge(emitter.summary[item].toJSON(), {
+                                _postman_variable_scope: item,
+                                _postman_exported_at: (new Date()).toISOString(),
+                                _postman_exported_using: util.userAgent
+                            })
+                        });
+                    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    asyncEach(emitter.exports, exportFile, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+                        // we now trigger actual done event which we had overridden
+<span class="cstat-no" title="statement not covered" >                        emitter.emit('done', err, emitter.summary);</span>
+<span class="cstat-no" title="statement not covered" >                        callback(err, emitter.summary);</span>
+                    });
+                }
+            });
+&nbsp;
+            // generate pseudo assertion events since runtime does not trigger assertion events yet.
+            // without this, all reporters would needlessly need to extract assertions and create an error object
+            // out of it
+<span class="cstat-no" title="statement not covered" >            emitter.on('script', <span class="fstat-no" title="function not covered" >function (err, o) {</span></span>
+                // we iterate on each test assertion to trigger an event. during this, we create a pseudo error object
+                // for the assertion
+<span class="cstat-no" title="statement not covered" >                var index = 0,</span>
+                    type = o &amp;&amp; o.event &amp;&amp; o.event.listen;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                _.forEach(_.get(o.execution, 'globals.tests'), <span class="fstat-no" title="function not covered" >function (passed, assertion) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    emitter.emit('assertion', (passed ? null : {</span>
+                        name: 'AssertionFailure',
+                        index: index,
+                        message: assertion,
+&nbsp;
+                        stack: 'AssertionFailure: Expected tests["' + assertion + '"] to be truth-like\n' +
+                            '   at Object.eval test.js:' + (index + 1) + ':' +
+                            ((o.cursor &amp;&amp; o.cursor.position || 0) + 1) + ')'
+                    }), _.assignIn({ assertion: assertion }, o));
+<span class="cstat-no" title="statement not covered" >                    index += 1;</span>
+                });
+&nbsp;
+                // bubble special script name based events
+<span class="cstat-no" title="statement not covered" >                type &amp;&amp; emitter.emit(type + 'Script', err, o);</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            emitter.on('beforeScript', <span class="fstat-no" title="function not covered" >function (err, o) {</span></span>
+                // bubble special script name based events
+<span class="cstat-no" title="statement not covered" >                o &amp;&amp; o.event &amp;&amp; o.event &amp;&amp; emitter.emit(_.camelCase('before-' + o.event.listen + 'Script'), err, o);</span>
+            });
+&nbsp;
+            // initialise all the reporters
+<span class="cstat-no" title="statement not covered" >            !emitter.reporters &amp;&amp; (emitter.reporters = {});</span>
+<span class="cstat-no" title="statement not covered" >            _.isArray(reporters) &amp;&amp; _.forEach(reporters, <span class="fstat-no" title="function not covered" >function (reporterName) {</span></span>
+                // disallow duplicate reporter initialisation
+<span class="cstat-no" title="statement not covered" >                if (_.has(emitter.reporters, reporterName)) { <span class="cstat-no" title="statement not covered" >return; </span>}</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                var Reporter = defaultReporters[reporterName];</span>
+&nbsp;
+                // check if the reporter is not a local reporter, then load an external reporter
+<span class="cstat-no" title="statement not covered" >                if (!Reporter) {</span>
+<span class="cstat-no" title="statement not covered" >                    try {</span>
+<span class="cstat-no" title="statement not covered" >                        Reporter = require((<span class="fstat-no" title="function not covered" >function (name) {</span> // ensure scoped packages are loaded</span>
+<span class="cstat-no" title="statement not covered" >                            var prefix = '',</span>
+                                scope = (name.charAt(0) === '@') &amp;&amp; name.substr(0, name.indexOf('/') + 1);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            if (scope) {</span>
+<span class="cstat-no" title="statement not covered" >                                prefix = scope;</span>
+<span class="cstat-no" title="statement not covered" >                                name = name.substr(scope.length);</span>
+                            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            return prefix + 'newman-reporter-' + name;</span>
+                        }(reporterName)));
+                    }
+                    // we suppress this error since, the check of missing error is done later
+                    // @todo - maybe have a debug mode and log error there
+                    catch (error) { } // eslint-disable-line no-empty
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                try {</span>
+                    // we could have checked _.isFunction(Reporter), here, but we do not do that so that the nature of
+                    // reporter error can be bubbled up
+<span class="cstat-no" title="statement not covered" >                    Reporter &amp;&amp; (emitter.reporters[reporterName] = new Reporter(emitter,</span>
+                        _.get(options, 'reporter.' + reporterName, {}), options));
+                }
+                catch (error) {
+                    // if the reporter errored out during initialisation, we should not stop the run simply log
+                    // the error stack trace for debugging
+                    // @todo: route this via print module to respect silent flags
+<span class="cstat-no" title="statement not covered" >                    console.warn(error);</span>
+                }
+&nbsp;
+                // if the reporter is not loaded then we need to warn users
+<span class="cstat-no" title="statement not covered" >                if (!(_.isFunction(Reporter) &amp;&amp; _.isObject(emitter.reporters[reporterName]))) {</span>
+                    // @todo: route this via print module to respect silent flags
+<span class="cstat-no" title="statement not covered" >                    console.warn(`newman warning: "${reporterName}" reporter could not be loaded.`);</span>
+                }
+            });
+&nbsp;
+            // raise warning when more than one dominant reporters are used
+<span class="cstat-no" title="statement not covered" >            (<span class="fstat-no" title="function not covered" >function (reporters) {</span></span>
+                // find all reporters whose `dominant` key is set to true
+<span class="cstat-no" title="statement not covered" >                var conflicts = _.keys(_.transform(reporters, <span class="fstat-no" title="function not covered" >function (conflicts, reporter, name) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    reporter.dominant &amp;&amp; (conflicts[name] = true);</span>
+                }));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                (conflicts.length &gt; 1) &amp;&amp; // if more than one dominant, raise a warning</span>
+                    console.warn(`newman warning: ${conflicts.join(', ')} reporters might not work well together.`);
+            }(emitter.reporters));
+&nbsp;
+            // we ensure that everything is async to comply with event paradigm and start the run
+<span class="cstat-no" title="statement not covered" >            setImmediate(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                run.start(callbacks);</span>
+            });
+        });
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return emitter;</span>
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 09:28:25 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>

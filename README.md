@@ -1,7 +1,7 @@
 # test coverage for  [newman (v3.5.2)](https://github.com/postmanlabs/newman)  [![npm package](https://img.shields.io/npm/v/npmtest-newman.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-newman) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-newman.svg)](https://travis-ci.org/npmtest/node-npmtest-newman)
 #### Command-line companion utility for Postman
 
-[![NPM](https://nodei.co/npm/newman.png?downloads=true)](https://www.npmjs.com/package/newman)
+[![NPM](https://nodei.co/npm/newman.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/newman)
 
 | git-branch : | [alpha](https://github.com/npmtest/node-npmtest-newman/tree/alpha)|
 |--:|:--|
@@ -9,11 +9,17 @@
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-newman/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-newman/build/test-report.html)|
 | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-newman/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-newman/tree/gh-pages/build)|
 
-[![istanbul-coverage](https://npmtest.github.io/node-npmtest-newman/build/screenCapture.buildCustomOrg.browser.coverage.html.png)](https://npmtest.github.io/node-npmtest-newman/build/coverage.html/index.html)
+- [https://npmtest.github.io/node-npmtest-newman/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-newman/build/coverage.html/index.html)
 
-[![test-report](https://npmtest.github.io/node-npmtest-newman/build/screenCapture.buildCustomOrg.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmtest%252Fnode-npmtest-newman%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-newman/build/test-report.html)
+[![istanbul-coverage](https://npmtest.github.io/node-npmtest-newman/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fcoverage.lib.html.png)](https://npmtest.github.io/node-npmtest-newman/build/coverage.html/index.html)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-newman/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-newman%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-newman/build/apidoc.html)
+- [https://npmtest.github.io/node-npmtest-newman/build/test-report.html](https://npmtest.github.io/node-npmtest-newman/build/test-report.html)
+
+[![test-report](https://npmtest.github.io/node-npmtest-newman/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-newman/build/test-report.html)
+
+- [https://npmdoc.github.io/node-npmdoc-newman/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-newman/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-newman/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-newman/build/apidoc.html)
 
 ![npmPackageListing](https://npmtest.github.io/node-npmtest-newman/build/screenCapture.npmPackageListing.svg)
 
@@ -28,7 +34,6 @@
 {
     "author": {
         "name": "Postman Labs",
-        "email": "help@getpostman.com",
         "url": "="
     },
     "bin": {
@@ -103,34 +108,27 @@
     "main": "index.js",
     "maintainers": [
         {
-            "name": "a85",
-            "email": "abhinav@rickreation.com"
+            "name": "a85"
         },
         {
-            "name": "abhijitkane",
-            "email": "abhijitkane@gmail.com"
+            "name": "abhijitkane"
         },
         {
-            "name": "czardoz",
-            "email": "aniketpanse@gmail.com"
+            "name": "czardoz"
         },
         {
-            "name": "kunagpal",
-            "email": "kunagpal@gmail.com"
+            "name": "kunagpal"
         },
         {
-            "name": "postman-admin",
-            "email": "help@getpostman.com"
+            "name": "postman-admin"
         },
         {
-            "name": "shamasis",
-            "email": "mail@shamasis.net"
+            "name": "shamasis"
         }
     ],
     "name": "newman",
     "optionalDependencies": {},
     "preferGlobal": true,
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/postmanlabs/newman.git"

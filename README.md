@@ -1,4 +1,7 @@
-# test coverage for  [newman (v3.5.2)](https://github.com/postmanlabs/newman)  [![npm package](https://img.shields.io/npm/v/npmtest-newman.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-newman) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-newman.svg)](https://travis-ci.org/npmtest/node-npmtest-newman)
+# npmtest-newman
+
+#### basic test coverage for  [newman (v3.5.2)](https://github.com/postmanlabs/newman)  [![npm package](https://img.shields.io/npm/v/npmtest-newman.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-newman) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-newman.svg)](https://travis-ci.org/npmtest/node-npmtest-newman)
+
 #### Command-line companion utility for Postman
 
 [![NPM](https://nodei.co/npm/newman.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/newman)
